@@ -23,6 +23,9 @@ public class HomePage extends BasePage {
   private By byProductAddedModal = By.xpath("//div[@id='layer_cart']");
   private By byProductNameFromModal = By.xpath("//span[@id='layer_cart_product_title']");
   private By byModalTitleFromModal = By.xpath("//div[contains(@class, 'layer_cart_product')]//h2/i[@class='icon-ok']");
+  private By byCheckOutShoppingCart = By.xpath("//div[@class='shopping_cart']//a[@title='View my shopping cart']");
+  private final By byShoppingCartDropdown = By.xpath("//div[@class='cart_block block exclusive']");
+  private By byModalCheckoutButton = By.xpath("//a[@title='Proceed to checkout']");
 
   public HomePage(WebDriver driver) {
     super(driver, pageLoadedCondition);
@@ -80,9 +83,10 @@ public class HomePage extends BasePage {
         .equals(productName);
   }
 
-  public boolean wasElementAddedToCart(WebElement sectionElement) {
-    // return sectionElement.findElement(byAddToCartFromElement).isDisplayed();
-    return false;
+  public void clickModalCheckOutShoppingCart() {
+    getProductAddedModal()
+        .findElement(byModalCheckoutButton)
+        .click();
   }
 
   public void goToSectionElementDetails(WebElement sectionElement) {
@@ -90,11 +94,19 @@ public class HomePage extends BasePage {
     sectionElement.findElement(byLinkFromElement).click();
   }
 
+  // public void displayShoppingCart() {
+  // driver.findElement(byShoppingCartDropdown).click();
+  // }
+
   public void clickContactUs() {
     driver.findElement(byContactUsButton).click();
   }
 
   public void clickSignIn() {
     driver.findElement(bySignIn).click();
+  }
+
+  public void clickCheckoutShoppingCart() {
+    driver.findElement(byCheckOutShoppingCart).click();
   }
 }
