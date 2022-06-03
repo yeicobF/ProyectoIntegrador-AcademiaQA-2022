@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 
 public class HomePage extends BasePage {
   private static final By byHomeSalesLogo = By.xpath("//div[@id='homepage-slider']");
@@ -18,6 +19,10 @@ public class HomePage extends BasePage {
 
   // https://www.guru99.com/xpath-selenium.html
   By byLinkFromElement = By.xpath("//child::a[@class='product_img_link']");
+  By byAddToCartFromElement = By.xpath("//child::a[@title='Add to cart']");
+  private By byProductAddedModal = By.xpath("//div[@id='layer_cart']");
+  private By byProductNameFromModal = By.xpath("//span[@id='layer_cart_product_title']");
+  private By byModalTitleFromModal = By.xpath("//div[contains(@class, 'layer_cart_product')]//h2/i[@class='icon-ok']");
 
   public HomePage(WebDriver driver) {
     super(driver, pageLoadedCondition);
@@ -41,6 +46,43 @@ public class HomePage extends BasePage {
 
   public String getSectionElementName(WebElement sectionElement) {
     return sectionElement.findElement(byLinkFromElement).getAttribute("title");
+  }
+
+  public void addSectionElementToCart(WebElement sectionElement) {
+    sectionElement.findElement(byAddToCartFromElement).click();
+  }
+
+  private WebElement getProductAddedModal() {
+    return driver.findElement(byProductAddedModal);
+  }
+
+  public void waitUntilModalIsDisplayed(Wait<WebDriver> wait) {
+    wait.until(ExpectedConditions
+        .visibilityOfElementLocated(byProductAddedModal));
+  }
+
+  public boolean isProductAddedModalDisplayed() {
+    WebElement productAddedModal = getProductAddedModal();
+    return productAddedModal
+        .isDisplayed();
+  }
+
+  public boolean isProductAddedModalTitleDisplayed() {
+    return getProductAddedModal()
+        .findElement(byModalTitleFromModal)
+        .isDisplayed();
+  }
+
+  public boolean isAddedProductNameDisplayedInModal(String productName) {
+    return getProductAddedModal()
+        .findElement(byProductNameFromModal)
+        .getText()
+        .equals(productName);
+  }
+
+  public boolean wasElementAddedToCart(WebElement sectionElement) {
+    // return sectionElement.findElement(byAddToCartFromElement).isDisplayed();
+    return false;
   }
 
   public void goToSectionElementDetails(WebElement sectionElement) {

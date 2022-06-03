@@ -20,7 +20,7 @@ public class ProductDetails extends BasePage {
         .equals(productName);
   }
 
-  public boolean isProductNameDisplayed() {
+  public boolean isProductTitleDisplayed() {
     return driver.findElement(byProductName).isDisplayed();
   }
 
