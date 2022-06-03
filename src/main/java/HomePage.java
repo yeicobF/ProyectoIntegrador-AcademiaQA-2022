@@ -16,6 +16,9 @@ public class HomePage extends BasePage {
       .xpath("//ul[@id='home-page-tabs']//a[@href='#homefeatured' and text()='Popular']");
   private final By bySectionElements = By.xpath("//ul[@id='homefeatured']/li");
 
+  // https://www.guru99.com/xpath-selenium.html
+  By byLinkFromElement = By.xpath("//child::a[@class='product_img_link']");
+
   public HomePage(WebDriver driver) {
     super(driver, pageLoadedCondition);
   }
@@ -36,10 +39,11 @@ public class HomePage extends BasePage {
     return driver.findElements(bySectionElements);
   }
 
-  public void goToSectionElementDetails(WebElement sectionElement) {
-    // https://www.guru99.com/xpath-selenium.html
-    By byLinkFromElement = By.xpath("./child::a[@class='product_img_link']");
+  public String getSectionElementName(WebElement sectionElement) {
+    return sectionElement.findElement(byLinkFromElement).getAttribute("title");
+  }
 
+  public void goToSectionElementDetails(WebElement sectionElement) {
     // Encontramos el enlace del elemento a partir del nodo en que está el elemento.
     sectionElement.findElement(byLinkFromElement).click();
   }
