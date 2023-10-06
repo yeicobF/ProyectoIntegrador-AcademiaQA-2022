@@ -37,12 +37,3 @@ lo cual pondremos en practica los siguientes puntos:
 - Automatizacion de casos de prueba ( zip bajo un formato
   "Nombre_Proyecto2022.zip", favor de incluir el mayor numero de casos de prueba
   automatizados posible)
-
-## Entrega y fecha de entrega
-
-FAVOR DE ENTREGAR SUS EJERCICIOS , PARA EL **_JUEVES 2 DE JUNIO A MEDIO DIA_**.
-ME GUSTARIA EVALUARLOS E IRLES DEJANDO RETROALIMENTACION ANTES DEL CIERRE QUE SE
-VIENE EL VIERNES DE ESTA SEMANA
-
-> **_Favor de enviar sus archivos a:_** **victor.carrillo29@gmail.com** con el
-> titulo **Proyecto Integrador <nombre>**
